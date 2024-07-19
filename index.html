@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans:400,500&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c62d47a260.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <input class="modal-title" id="modal-title" placeholder="Title" type="text">
+            <input class="modal-text" id="modal-text" placeholder="Take a note..." type="text">
+            <span class="modal-close-button" id="modal-close-button">Close</span>
+        </div>
+    </div>
+    <main>
+        <header>
+            <img class="header-logo" src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png">
+            <h2 class="header-title">Keep</h2>
+            <input type="text" id="search-bar" placeholder="Search notes...">
+            <div class="menu">
+                <button id="menu-button"><i class="fas fa-bars"></i></button>
+                <div id="menu-dropdown" class="menu-dropdown">
+                    <button id="new-note">New Note</button>
+                    <button id="delete-all-notes">Delete All Notes</button>
+                    <button id="settings">Settings</button>
+                </div>
+            </div>
+        </header>
+        <div id="form-container">
+            <form id="form" autocomplete="off">
+                <label for="note-title" class="sr-only">Title</label>
+                <input type="text" id="note-title" placeholder="Title">
+                <label for="note-text" class="sr-only">Take a note</label>
+                <input type="text" id="note-text" placeholder="Take a note...">
+                <div id="form-buttons">
+                    <button type="submit" id="submit-button">Submit</button>
+                    <button type="button" id="form-close-button">Close</button>
+                </div>
+            </form>
+        </div>
+        <div id="notes"></div>
+        <div id="placeholder">
+            <i id="placeholder-logo" class="toolbar-delete fas fa-lightbulb"></i>
+            <p id="placeholder-text">Notes you add appear here</p>
+        </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

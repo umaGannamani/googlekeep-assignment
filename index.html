@@ -10,6 +10,19 @@
         <div class="modal-content">
             <input class="modal-title" id="modal-title" placeholder="Title" type="text">
             <input class="modal-text" id="modal-text" placeholder="Take a note..." type="text">
+            <input class="modal-tags" id="modal-tags" placeholder="Add tags (comma separated)" type="text">
+            <div class="color-picker">
+                <span class="color-option" data-color="#fff" style="background-color: #fff;"></span>
+                <span class="color-option" data-color="#f28b82" style="background-color: #f28b82;"></span>
+                <span class="color-option" data-color="#fbbc04" style="background-color: #fbbc04;"></span>
+                <span class="color-option" data-color="#fff475" style="background-color: #fff475;"></span>
+                <span class="color-option" data-color="#ccff90" style="background-color: #ccff90;"></span>
+                <span class="color-option" data-color="#a7ffeb" style="background-color: #a7ffeb;"></span>
+                <span class="color-option" data-color="#cbf0f8" style="background-color: #cbf0f8;"></span>
+                <span class="color-option" data-color="#aecbfa" style="background-color: #aecbfa;"></span>
+                <span class="color-option" data-color="#d7aefb" style="background-color: #d7aefb;"></span>
+                <span class="color-option" data-color="#fdcfe8" style="background-color: #fdcfe8;"></span>
+            </div>
             <span class="modal-close-button" id="modal-close-button">Close</span>
         </div>
     </div>
@@ -33,6 +46,8 @@
                 <input type="text" id="note-title" placeholder="Title">
                 <label for="note-text" class="sr-only">Take a note</label>
                 <input type="text" id="note-text" placeholder="Take a note...">
+                <label for="note-tags" class="sr-only">Tags</label>
+                <input type="text" id="note-tags" placeholder="Add tags (comma separated)">
                 <div id="form-buttons">
                     <button type="submit" id="submit-button">Submit</button>
                     <button type="button" id="form-close-button">Close</button>

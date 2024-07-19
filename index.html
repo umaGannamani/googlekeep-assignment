@@ -13,16 +13,9 @@
             <input class="modal-tags" id="modal-tags" placeholder="Add tags (comma separated)" type="text">
             <div class="color-picker">
                 <span class="color-option" data-color="#fff" style="background-color: #fff;"></span>
-                <span class="color-option" data-color="#f28b82" style="background-color: #f28b82;"></span>
-                <span class="color-option" data-color="#fbbc04" style="background-color: #fbbc04;"></span>
-                <span class="color-option" data-color="#fff475" style="background-color: #fff475;"></span>
-                <span class="color-option" data-color="#ccff90" style="background-color: #ccff90;"></span>
-                <span class="color-option" data-color="#a7ffeb" style="background-color: #a7ffeb;"></span>
-                <span class="color-option" data-color="#cbf0f8" style="background-color: #cbf0f8;"></span>
-                <span class="color-option" data-color="#aecbfa" style="background-color: #aecbfa;"></span>
-                <span class="color-option" data-color="#d7aefb" style="background-color: #d7aefb;"></span>
-                <span class="color-option" data-color="#fdcfe8" style="background-color: #fdcfe8;"></span>
+                <!-- Add more color options here -->
             </div>
+            <button id="modal-save-button">Save</button>
             <span class="modal-close-button" id="modal-close-button">Close</span>
         </div>
     </div>
@@ -54,7 +47,14 @@
                 </div>
             </form>
         </div>
-        <div id="notes"></div>
+        <div id="notes-container">
+            <h2>Notes</h2>
+            <div id="notes"></div>
+        </div>
+        <div id="archive-container">
+            <h2>Archived Notes</h2>
+            <div id="archived-notes"></div>
+        </div>
         <div id="placeholder">
             <i id="placeholder-logo" class="toolbar-delete fas fa-lightbulb"></i>
             <p id="placeholder-text">Notes you add appear here</p>

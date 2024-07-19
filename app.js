@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal');
     const modalCloseButton = document.getElementById('modal-close-button');
+    const modalSaveButton = document.getElementById('modal-save-button');
     const form = document.getElementById('form');
     const notesContainer = document.getElementById('notes');
+    const archivedNotesContainer = document.getElementById('archived-notes');
     const placeholder = document.getElementById('placeholder');
     const searchBar = document.getElementById('search-bar');
     const menuButton = document.getElementById('menu-button');
@@ -14,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formTagsInput = document.getElementById('note-tags');
 
     let selectedColor = '#fff';
+    let editingNote = null;
 
     const toggleModal = () => {
         modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
@@ -34,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3>${title}</h3>
             <p>${text}</p>
             <div class="tags">${tagsHtml}</div>
+            <span class="archive-note">📦</span>
             <span class="delete-note">&times;</span>
         `;
         notesContainer.appendChild(note);
@@ -44,6 +48,43 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!notesContainer.hasChildNodes()) {
                 placeholder.style.display = 'block';
             }
+        });
+
+        note.querySelector('.archive-note').addEventListener('click', () => {
+            archiveNote(note);
+        });
+    };
+
+    const archiveNote = (note) => {
+        notesContainer.removeChild(note);
+        archivedNotesContainer.appendChild(note);
+        note.querySelector('.archive-note').remove();
+    };
+
+    const openEditModal = (note) => {
+        const title = note.querySelector('h3').textContent;
+        const text = note.querySelector('p').textContent;
+        const tags = Array.from(note.querySelectorAll('.tag')).map(tag => tag.textContent).join(', ');
+        const color = note.style.backgroundColor;
+
+        document.getElementById('modal-title').value = title;
+        document.getElementById('modal-text').value = text;
+        modalTagsInput.value = tags;
+        document.querySelector(`.color-option[data-color="${color}"]`).classList.add('selected');
+        selectedColor = color;
+
+        editingNote = note;
+        toggleModal();
+    };
+
+    const updateNote = (title, text, tags, color) => {
+        editingNote.querySelector('h3').textContent = title;
+        editingNote.querySelector('p').textContent = text;
+        editingNote.querySelector('.tags').innerHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        editingNote.style.backgroundColor = color;
+
+        editingNote.querySelector('.edit-note').addEventListener('click', () => {
+            openEditModal(editingNote);
         });
     };
 
@@ -60,13 +101,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const tags = tagsInput.split(',').map(tag => tag.trim()).filter(tag => tag).slice(0, 9);
 
         if (title || text) {
-            addNote(title, text, tags, selectedColor);
+            if (editingNote) {
+                updateNote(title, text, tags, selectedColor);
+                editingNote = null;
+            } else {
+                addNote(title, text, tags, selectedColor);
+            }
             form.reset();
             selectedColor = '#fff';
         }
     });
 
     modalCloseButton.addEventListener('click', toggleModal);
+
+    modalSaveButton.addEventListener('click', () => {
+        const title = document.getElementById('modal-title').value;
+        const text = document.getElementById('modal-text').value;
+        const tagsInput = modalTagsInput.value;
+        const tags = tagsInput.split(',').map(tag => tag.trim()).filter(tag => tag).slice(0, 9);
+
+        if (editingNote) {
+            updateNote(title, text, tags, selectedColor);
+            editingNote = null;
+        } else {
+            addNote(title, text, tags, selectedColor);
+        }
+        toggleModal();
+    });
 
     colorOptions.forEach(option => {
         option.addEventListener('click', () => {
